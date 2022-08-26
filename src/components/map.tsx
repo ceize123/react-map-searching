@@ -2,9 +2,6 @@ import { useState, useMemo, useCallback, useRef, useEffect } from "react";
 import {
   GoogleMap,
   Marker,
-  DirectionsRenderer,
-  Circle,
-  MarkerClusterer,
 } from "@react-google-maps/api";
 import Places from "./places";
 import Table from "./table";
@@ -12,12 +9,10 @@ import Time from "./time";
 
 
 type LatLngLiteral = google.maps.LatLngLiteral;
-type DirectionsResult = google.maps.DirectionsResult;
 type MapOptions = google.maps.MapOptions;
 
 export default function Map() {
-	// const [site, setSite] = useState<LatLngLiteral>();
-	// const [sites, setSites] = useState<LatLngLiteral[]>([]);
+
 	const [site, setSite] = useState<{p: LatLngLiteral, name: string}>();
 	const [sites, setSites] = useState<{p: LatLngLiteral, name: string}[]>([]);
 	const mapRef = useRef<GoogleMap>();
@@ -31,7 +26,6 @@ export default function Map() {
 
 	useEffect(() => {
 		if (site !== undefined) {
-			// setSites(sites => sites.concat(site));
 			setSites(sites => [site, ...sites]);
 		}
 	}, [site]);
@@ -52,7 +46,6 @@ export default function Map() {
 					options={options}
 					onLoad={onLoad}
 				>
-					{/* {site && <Marker position={site} />} */}
 					{sites.length &&
 						sites.map((site, idx) => (
 							< Marker key={idx} position={site.p} />

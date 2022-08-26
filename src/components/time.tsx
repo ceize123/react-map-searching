@@ -10,7 +10,6 @@ function Time({ site }: any) {
 		const getTime = async () => {
 			const response = await fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${site.lat}%2C${site.lng}&timestamp=0&key=${process.env.REACT_APP_GOOGLE_KEY}`);
 			const timezone = await response.json();
-			// console.log(timezoneId);
 	
 			const formatter = await new Intl.DateTimeFormat([], {
 				timeZone: timezone.timeZoneId,
@@ -21,7 +20,6 @@ function Time({ site }: any) {
 				minute: 'numeric',
 			});
 			await setTimeData({ timezone: timezone.timeZoneId, time: formatter.format(new Date()) })
-			// console.log(formatter.format(new Date()));
 		}
 		getTime();
 	}, [site]);

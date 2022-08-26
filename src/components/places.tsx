@@ -32,12 +32,8 @@ export default function Places({ setSite }: PlacesProps) {
 		setValue(val, false);
 		clearSuggestions();
 		const results = await getGeocode({ address: val });
-		console.log(results)
 		const { lat, lng } = await getLatLng(results[0]);
 		setSite({ lat, lng }, val);
-		
-
-		// setSite((site: LatLngLiteral) => site.concat({ lat, lng }));
 
 	};
 
@@ -48,14 +44,6 @@ export default function Places({ setSite }: PlacesProps) {
 			const latitude = position.coords.latitude;
 			const longitude = position.coords.longitude;
 
-			// https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=XXXXXXXXXXXX&longitude=XXXXXXXXXXXX&localityLanguage=en
-			// const geoApiUrl = `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`
-
-			// fetch(geoApiUrl)
-			// 	.then(res => res.json())
-			// 	.then(data => {
-			// 		setText(data.city)
-			// 	})
 			const response = await fetch(`https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${latitude}&longitude=${longitude}&localityLanguage=en`);
 			const data = await response.json();
 			const results = [
