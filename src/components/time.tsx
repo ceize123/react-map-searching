@@ -5,7 +5,7 @@ function Time({ site }: any) {
 	const [timeData, setTimeData] = useState<{timezone: string, time: string}>({
 			timezone: "",
 			time: ""
-		})
+	})
 	useEffect(() => {
 		const getTime = async () => {
 			const response = await fetch(`https://maps.googleapis.com/maps/api/timezone/json?location=${site.lat}%2C${site.lng}&timestamp=0&key=${process.env.REACT_APP_GOOGLE_KEY}`);
